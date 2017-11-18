@@ -41,9 +41,9 @@ nome_print = []
 start_time = time.time()
 
 #Destino dos logs
-gmail = 'jakoritarl@gmail.com'		#Seu email
-gmailpass = '*JAKL2002*'			#A senha do seu email
-enviar = 'kpbplpsjubs@gmail.com'	#Um email qualquer para receber os logs
+gmail = ''			#Seu email
+gmailpass = ''			#A senha do seu email
+enviar = ''			#Um email qualquer para receber os logs
 interval = 60
 
 #Desabilitanto multipla instancia
